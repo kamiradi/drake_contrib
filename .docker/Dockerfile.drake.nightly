@@ -1,0 +1,28 @@
+FROM ubuntu:jammy
+MAINTAINER Aditya Kamireddypalli "kamireddypalliaditya@gmail.com"
+
+ENV DRAKE_UNDERLAY /root/drake_workspace/
+
+RUN apt update && \
+    DEBIAN_FRONTEND=noninteractive apt install -y \
+    python3 \
+    make \
+    build-essential \
+    libssl-dev \
+    zlib1g-dev \
+    libbz2-dev \
+    libreadline-dev \
+    libsqlite3-dev \
+    wget \
+    curl \
+    llvm \
+    libncurses5-dev \
+    libncursesw5-dev \
+    xz-utils \
+    tk-dev \
+    libffi-dev \
+    liblzma-dev \
+    git
+
+WORKDIR $DRAKE_UNDERLAY
+

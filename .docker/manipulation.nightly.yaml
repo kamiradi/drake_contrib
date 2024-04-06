@@ -1,0 +1,19 @@
+version: "3.2"
+
+services:
+  manipulation_service:
+    image: manipulation_nightly:latest
+    container_name: manipulation-dev
+    build:
+      context: ../
+      dockerfile: .docker/Dockerfile.manipulation.nightly
+    network_mode: "host"
+    stdin_open: true
+    tty: true
+    privileged: true
+    volumes:
+      # - './output/:/root/pegnhole/output/'
+      - type: bind
+        source: ../
+        target: /root/drake_workspace/
+    command: /bin/bash

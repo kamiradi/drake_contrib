@@ -1,0 +1,63 @@
+FROM ubuntu:jammy
+MAINTAINER Aditya Kamireddypalli "kamireddypalliaditya@gmail.com"
+
+ENV WS_UNDERLAY /root/drake_workspace/
+ENV MANIPULATION_UNDERLAY /root/manipulation/
+ENV ROOT_DIR /root/
+
+RUN apt update && \
+    DEBIAN_FRONTEND=noninteractive apt install -y \
+    python3 \
+    make \
+    build-essential \
+    libssl-dev \
+    zlib1g-dev \
+    libbz2-dev \
+    libreadline-dev \
+    libsqlite3-dev \
+    wget \
+    curl \
+    llvm \
+    libncurses5-dev \
+    libncursesw5-dev \
+    xz-utils \
+    tk-dev \
+    libffi-dev \
+    liblzma-dev \
+    git
+
+
+RUN git clone https://github.com/pyenv/pyenv.git /pyenv
+ENV PYENV_ROOT /pyenv
+RUN /pyenv/bin/pyenv install 3.10.6
+RUN eval "$(/pyenv/bin/pyenv init -)" && /pyenv/bin/pyenv global 3.10.6 && \
+    pip install --upgrade pip && \
+    pip install numpy poetry setuptools wheel six auditwheel
+
+# RUN /pyenv/bin/pyenv local 3.10.6 && python3 -m pip3 install hydra-core --upgrade && \
+#     pip3 install jupyterlab && \
+#     pip install -U jupyter && \
+#     pip install jupyterlab-vim && \
+#     pip install nbdev && \
+#     pip install jupyros && \
+#     pip install jupyterlab-quarto
+
+WORKDIR $ROOT_DIR
+
+# Install manipulation
+RUN git clone --recursive --single-branch --branch nightly_dev https://github.com/kamiradi/manipulation.git
+
+WORKDIR $MANIPULATION_UNDERLAY
+
+RUN eval "$(/pyenv/bin/pyenv init -)" && \
+    /pyenv/bin/pyenv local 3.10.6 && \
+    poetry config virtualenvs.in-project true --local && \
+    poetry add hydra-core jupyterlab-vim nbdev \
+    jupyterlab-quarto && \
+    poetry install --with=dev
+
+WORKDIR $WS_UNDERLAY
+RUN eval "$(/pyenv/bin/pyenv init -)" && \
+    /pyenv/bin/pyenv local 3.10.6
+
+

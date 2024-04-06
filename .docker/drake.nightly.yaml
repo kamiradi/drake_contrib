@@ -1,0 +1,19 @@
+version: "3.2"
+
+services:
+  drake_service:
+    image: drake_nightly:latest
+    container_name: drake-dev
+    build:
+      context: ../
+      dockerfile: .docker/Dockerfile.drake.nightly
+    network_mode: "host"
+    stdin_open: true
+    tty: true
+    privileged: true
+    volumes:
+      # - './output/:/root/pegnhole/output/'
+      - type: bind
+        source: ../drake
+        target: /root/drake_workspace/
+    command: /bin/bash
