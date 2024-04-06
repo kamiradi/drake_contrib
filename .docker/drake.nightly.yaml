@@ -11,6 +11,11 @@ services:
     stdin_open: true
     tty: true
     privileged: true
+    deploy:
+      resources:
+        limits:
+          cpus: '20'
+          memory: 20G
     volumes:
       # - './output/:/root/pegnhole/output/'
       - type: bind
