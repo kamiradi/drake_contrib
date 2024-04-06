@@ -3,8 +3,15 @@
 
 I use this environment to keep track of various docker images for testing
 `drake`, `manipulation` and `underactuated`. Usually this requires quickly
-mounting a fresh brach from that deviates from the master, therefore I dont
-clone the repositories.
+mounting a fresh branch from that deviates from the master, therefore I dont
+clone the repositories. I manage individual repositories through submodules.
+
+### Setting up the repo
+To setup the repository, clone it into your local folder and then inside the
+parent folder of the repo run the following
+```
+git submodule update --init --recursive
+```
 
 ## Workflow
 ---

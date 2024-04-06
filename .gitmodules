@@ -1,0 +1,8 @@
+[submodule "drake"]
+	path = drake
+	url = git@github.com:kamiradi/drake.git
+	branch = 2dcontact
+[submodule "manipulation"]
+	path = manipulation
+	url = git@github.com:kamiradi/manipulation.git
+	branch = nightly_dev
