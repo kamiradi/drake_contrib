@@ -15,6 +15,15 @@ git submodule update --init --recursive
 
 ## Workflow
 ---
+This section describes how I ususally fwork with this repository, some common commands etc.
+
+### Git workflow
+
+Always remember to update the submodules
+```
+git submodule update --remote
+```
+
 ### Common Docker commands
 The following are some of the standard docker commands that are useful for
 developing using docker
