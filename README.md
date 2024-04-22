@@ -62,6 +62,8 @@ bazel test //... # build and test the entire project
 bazel test -j 2 //bindings/pydrake/systems:py/planar_scenegraph_visualizer_test
 # or
 bazel test -j HOST_CPUS*0.5 //bindings/pydrake/systems:py/planar_scenegraph_visualizer_test
+
+bazel test //bindings/pydrake/systems:py/planar_scenegraph_visualizer_py_pycodestyle
 ```
 
 

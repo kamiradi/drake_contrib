@@ -1,7 +1,7 @@
 FROM ubuntu:jammy
 MAINTAINER Aditya Kamireddypalli "kamireddypalliaditya@gmail.com"
 
-ENV DRAKE_UNDERLAY /root/drake_workspace/
+ENV DRAKE_UNDERLAY /root/drake/
 
 RUN apt update && \
     DEBIAN_FRONTEND=noninteractive apt install -y \
